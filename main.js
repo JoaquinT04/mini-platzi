@@ -1,82 +1,88 @@
- //Objeto Literal
-const natalia = {
-  name: "Natalia",
-  lastname: "Perez",
-  age: 20,
-  cursosAprobados: [
-    "Curso Definitivo de HTML y CSS",
-    "Curso Práctico de HTML y CSS",
-  ],
 
-  //aprobarCurso: function (){}
-
-  aprobarCurso(nuevoCursito){
-      this.cursosAprobados.push(nuevoCursito)
-  },
-
-};
-
-
-/*Hacer que Natalia apruebe otro curso
-natalia.cursosAprobados.push("Curso de Responsive Design");*/
-
-
-// Primer Prototipo
-
-function Student(name, lastname, age, cursosAprobados){
-  this.name = name;
-  this.lastname = lastname;
-  this.age = age;
-  this.cursosAprobados = cursosAprobados;
-
-  /* this.aprobarCurso = function() {}*/
+class LearningPaths {
+	constructor({
+		name,
+		description,
+		courses = [],
+	}){
+		this.name = name;
+		this.description = description;
+		this.courses = courses;
+	}
 }
 
-Student.prototype.aprobarCurso =function aprobarCurso(nuevoCursito){
-  this.cursosAprobados.push(nuevoCursito)
-}
-
-const juanita = new Student("Juanita", "Alvarez", 15, ["Curso de Introducción a la Producción de Videojuegos", "Curso de Creación de Personajes"]);
-
-// Prototipos con la sintaxis de clases
-
-class Student2{
-  // Patrón ROR (Recive object Return object)
-  constructor({
-    name,
-    cursosAprobados = [],
-    lastname,
-    age,
-    twitter,
-    instagram,
-    facebook,
-    email,
-  }) {
-    this.name = name;
-    this.lastname = lastname;
-    this.age = age;
-    this.cursosAprobados = cursosAprobados;
-    this.email = email;
-  }
-
-  aprobarCurso(nuevoCursito){
-    this.cursosAprobados.push(nuevoCursito)
-  }
-}
-
-
-const miguelito = new Student2({
-  name:"Miguel",
-  lastname: "Ramirez",
-  age: 28,
-  cursosAprobados: ["Curso de Análisis de Negocios para Ciencia de Datos",
-  "Curso de Principios de visualización de Datos para BI"], 
-  email: "miguelon@platzi.com",
+const escuelaWeb = new LearningPaths({
+	name: "Escuela de Desarrollo Web",
+	description: "descripcion de la escuela",
+	courses: [
+		"Curso Definitivo de HTML y CSS",
+		"Curso Práctico de HTML y CSS",
+		"Curso de Responsive Design",
+	],
 });
 
-const marcos = new Student2({
-  email: "marquitos@platzi.com",
-  name:"Marcos",
-  lastname: "Gomez",
-  age: 30, 
-})
+const escuelaVgs = new LearningPaths({
+	name: "Escuela de Videojuegos",
+	description:"Esta escuela te guiará para convertirte, desde cero, en un profesional listo para diseñar, desarrollar y lanzar un videojuego.",
+	courses: [
+		"Curso de Introducción a la Producción de Vgs",
+		"Curso de Planeación y Dirección de Vgs Indies",
+		"Curso de Creación de Vgs",
+	],
+});
+
+const escuelaData = new LearningPaths({
+	name: "Escuela de Data Science",
+	description:"Domina las herramientas y técnicas para el procesamiento de Big Data y Ciencia de Datos.",
+	courses: [
+		"Curso de Análisis de Negocios para Ciencia de Datos",
+		"Curso Básico de Python",
+		"Curso de Jupyter Notebook para Ciencia de Datos",
+	],
+});
+
+class Student {
+	constructor ({
+		name,
+		email,
+		username,
+		twitter = undefined,
+		instagram = undefined,
+		facebook = undefined,
+		approvedCourses = [],
+		learningPaths = [],
+	}) {
+		this.name = name;
+		this.email = email;
+		this.username = username;
+		this.socialMedia = {
+			twitter, 
+			instagram,
+			facebook,	
+		}
+		this.approvedCourses = approvedCourses; 
+		this.learningPaths = learningPaths; 
+	}
+}
+
+const joaquin = new Student({
+	name: "Joaquin",
+	username: "Joaquin",
+	email: "joakoelkapo_gyt@hotmail.com",
+	twitter: "joakoTejerina",
+	learningPaths: [
+		escuelaWeb,
+		escuelaVgs,
+	], 
+});
+
+const miguelito = new Student({
+	name: "Miguel",
+	username: "MiguelitoFeliz",
+	email: "miguelP@platzi.com",
+	instagram: "miguelito_Feliz",
+	learningPaths: [
+		escuelaWeb,
+		escuelaData,
+	],
+});
