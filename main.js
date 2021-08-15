@@ -1,4 +1,3 @@
-
 class LearningPaths {
 	constructor({
 		name,
