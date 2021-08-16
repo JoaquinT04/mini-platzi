@@ -59,6 +59,13 @@ const cursoProgBasica = new Courses ({
 	]
 });
 
+/*cursoProgBasica.name
+me devuelve lo que esta en el atributo name
+*/
+
+/*cursoProgBasica.name = "agsfa";
+cambia el valor del atributo name con el valor despues del signo igual */
+
 const cursoDefHTMLYCSS= new Courses ({
 	name:"Curso Definitivo de HTML y CSS",
 });

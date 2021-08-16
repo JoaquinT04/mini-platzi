@@ -3,7 +3,16 @@ export default class Modules{
 		name,
 		lessons,
 	}){
-		this.name = name;
+		this._name = name;
 		this.lessons = lessons;
 	}	
+
+	get name (){
+		return this._name;
+	}
+	
+	set name(name){
+		this._name = name;
+	}
+
 }
