@@ -21,5 +21,4 @@ export default class Comments {
 	set userName (userName){
 		this._userName = userName;
 	}
-
 }

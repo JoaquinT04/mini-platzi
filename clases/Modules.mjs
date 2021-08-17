@@ -1,13 +1,11 @@
-export default class LearningPaths {
+export default class Modules{
 	constructor({
 		name,
-		description,
-		courses = [],
+		lessons,
 	}){
 		this._name = name;
-		this.description = description;
-		this.courses = courses;
-	}
+		this.lessons = lessons;
+	}	
 
 	get name (){
 		return this._name;
@@ -16,5 +14,4 @@ export default class LearningPaths {
 	set name(name){
 		this._name = name;
 	}
-
 }
