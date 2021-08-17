@@ -46,6 +46,13 @@ class Student {
 		this._userName = userName;
 	}
 
+	publicarComentario(commentContent){
+		const comment = new Comments({
+			content: commentContent,
+			studentName: this._name,
+		});
+		comment.publicar();
+	}
 }
 
 // Free Student
@@ -57,7 +64,7 @@ class FreeStudent extends Student{
 
 	approveCourse(newCourse){
 		if(newCourse.isFree){
-			this.approveCourse.push(newCourse);
+			this.approvedCourses.push(newCourse);
 		}
 		else{
 			console.warn("Lo sentimos, " + this._name + ", solo puedes tomar cursos abiertos");
@@ -72,8 +79,8 @@ class BasicStudent extends Student{
 	}
 
 	approveCourse(newCourse){
-		if(newCourse.lang !== "English"){
-			this.approveCourse.push(newCourse);
+		if(newCourse.lang !== "english"){
+			this.approvedCourses.push(newCourse);
 		}
 		else{
 			console.warn("Lo sentimos, " + this._name + ", no puedes tomar cursos en inglés");
@@ -88,7 +95,28 @@ class ExpertStudent extends Student{
 	}
 
 	approveCourse(newCourse){
-		this.approveCourse.push(newCourse);
+		this.approvedCourses.push(newCourse);
+	}
+}
+
+// Teacher Student
+class TeacherStudent extends Student{
+	constructor (props){
+		super(props);
+	}
+
+	approveCourse(newCourse){
+		this.approvedCourses.push(newCourse);
+	}
+
+	publicarComentario(commentContent){
+		const comment = new Comments({
+			content: commentContent,
+			_userName: this.name,
+			studentRole: "Profesor",
+		});
+
+		comment.publicar();
 	}
 }
 
@@ -173,27 +201,45 @@ class Lessons {
 class Comments {
 	constructor ({
 		fotoDePerfil,
-		userName,
-		userPosition = "",
+		studentName,
+		studentRole = "estudiante",
 		fecha,
-		likes,
 		content,
 	}){
+		this._studentRole =studentRole;
+		this._studentName = studentName;
 		this.fotoDePerfil = fotoDePerfil;
-		this._userName = userName;
 		this.fecha = fecha;
-		this.likes = likes;
+		this.likes = 0;
 		this.content = content;
 	}
 
-	get userName (){
-		return this._userName;
+	get studentName (){
+		return this._studentName;
 	}
 	
-	set userName (userName){
-		this._userName = userName;
+	set studentName (studentName){
+		this._studentName= this.studentName;
 	}
 
+	get studentRole (){
+		return this._studentRole;
+	}
+	
+	set studentRole (studentRole){
+		this._studentRole = studentRole;
+	}
+
+
+	añadirLike(){
+		this.likes++;
+	}
+
+	publicar(){
+		console.log(this._studentName + "(" + this.studentRole+")");
+		console.log(this.likes + " likes");
+		console.log(this.content);
+	}
 }
 
 // Learnings Paths
@@ -398,4 +444,11 @@ const miguelito = new BasicStudent({
 		escuelaWeb,
 		escuelaData,
 	],
+});
+
+const freddy = new TeacherStudent({
+	name: "Freddy Vega",
+	username: "freddier",
+	email: "f@gep.com",
+	instagram: "freddiervega",
 });
